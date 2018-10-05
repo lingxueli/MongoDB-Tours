@@ -30,8 +30,9 @@ server.route( [
     {
         method: 'GET',
         path: '/api/tours/{name}',
+        config: {json: {space: 2}},
         handler: function(request, reply) {
-          return "Retrieving " + request.params.name;
+          return collection.findOne({"tourName": request.params.name});
         }
     },
     // Update a single tour
