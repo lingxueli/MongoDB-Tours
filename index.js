@@ -22,8 +22,10 @@ server.route( [
     {
         method: 'POST',
         path: '/api/tours',
+        config: {json: {space: 2}},
         handler: function(request, reply) {
-          return "Adding new tour";
+          collection.insertOne(request.payload);
+          return request.payload;
         }
     },
     // Get a single tour
