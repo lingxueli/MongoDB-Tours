@@ -9,8 +9,12 @@ server.route( [
     {
         method: 'GET',
         path: '/api/tours',
-        handler: function(request, reply) {  
-          return collection.find().toArray();
+        handler: function(request, reply) {
+          var findObject = {};
+          for (var key in request.query){
+            findObject[key] = request.query[key];
+          }
+          return collection.find(findObject).toArray();
         }
     },
     // Add new tour
