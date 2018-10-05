@@ -64,7 +64,8 @@ server.route( [
         method: 'DELETE',
         path: '/api/tours/{name}',
         handler: function(request, reply) {
-          return "Deleting " + request.params.name;
+          collection.deleteOne({tourName:request.params.name});
+          return reply.response().code(204);
         }
     },
     // Home page
