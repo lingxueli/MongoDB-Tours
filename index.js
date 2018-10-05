@@ -41,9 +41,13 @@ server.route( [
     {
         method: 'PUT',
         path: '/api/tours/{name}',
+        config: {json: {space: 2}},
         handler: function(request, reply) {
-            // request.payload variables
-            return "Updating " + request.params.name;
+          collection.updateOne(
+            {tourName:request.params.name},
+            {$set: request.payload}
+          );
+          return collection.findOne({"tourName":request.params.name});
         }
     },
     // Delete a single tour
