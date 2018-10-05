@@ -43,11 +43,20 @@ server.route( [
         path: '/api/tours/{name}',
         config: {json: {space: 2}},
         handler: function(request, reply) {
-          collection.updateOne(
-            {tourName:request.params.name},
-            {$set: request.payload}
-          );
-          return collection.findOne({"tourName":request.params.name});
+          if (request.query.replace == "true"){
+            request.payload.tourName = request.params.name;
+            collection.replaceOne(
+              {"tourName":request.params.name},
+              request.payload);
+              return collection.findOne({"tourName":request.params.name});
+          }else{
+            collection.updateOne(
+              {tourName:request.params.name},
+              {$set: request.payload}
+            );
+            return collection.findOne({"tourName":request.params.name});
+          }
+
         }
     },
     // Delete a single tour
