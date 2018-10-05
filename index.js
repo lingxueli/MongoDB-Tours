@@ -9,6 +9,7 @@ server.route( [
     {
         method: 'GET',
         path: '/api/tours',
+        config: {json: {space: 2}},
         handler: function(request, reply) {
           var findObject = {};
           for (var key in request.query){
